@@ -5,10 +5,11 @@
 |_|B|_|_|
 |S|_|_|_|
 
+S: Start state
+G: Goal state
+B: Blocked state
+X" Lava state
 =#
-
-
-
 
 using POMDPs, POMDPModelTools, QuickPOMDPs, DiscreteValueIteration
 
@@ -70,7 +71,7 @@ function P(s::State, a::Action)
     next_states[1] = s
     probs[1] = 1 - sum(probs)
 
-    # return sparse categorical dist 
+    # return sparse categorical dist - distribution over all possible next states
     return SparseCat(next_states, probs)
 end
 
