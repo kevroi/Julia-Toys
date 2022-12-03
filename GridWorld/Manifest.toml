@@ -2,7 +2,7 @@
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "a5793244022d93f8242f7178c88d631bf090df51"
+project_hash = "8d3d4a476dca48ff8b82dc23d90a9a7a1a4c7b8b"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra"]
@@ -436,6 +436,12 @@ git-tree-sha1 = "36d32d62e036ae8ebb9b8efe9e8658f902815700"
 uuid = "08074719-1b2a-587c-a292-00f91cc44415"
 version = "0.3.13"
 
+[[deps.POMDPPolicies]]
+deps = ["Distributions", "LinearAlgebra", "POMDPTools", "POMDPs", "Parameters", "Random", "Reexport", "SparseArrays", "StatsBase"]
+git-tree-sha1 = "bd72fbfea89a64946963518aa53097e2a1233c59"
+uuid = "182e52fb-cfd0-5e46-8c26-fd0667c990f4"
+version = "0.4.3"
+
 [[deps.POMDPTesting]]
 deps = ["POMDPTools", "POMDPs", "Random", "Reexport"]
 git-tree-sha1 = "e5acfa4a9c84252491860939a2af7f4ffe501057"
@@ -641,6 +647,12 @@ deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "Linear
 git-tree-sha1 = "c79322d36826aa2f4fd8ecfa96ddb47b174ac78d"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.10.0"
+
+[[deps.TabularTDLearning]]
+deps = ["POMDPLinter", "POMDPTools", "POMDPs", "Parameters", "Random"]
+git-tree-sha1 = "da7bb600bf9bd167a2a72eed52756bcd8e5c08e3"
+uuid = "df77095f-98f0-51e5-a706-d0ff5a5ad33f"
+version = "0.4.3"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]

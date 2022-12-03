@@ -8,7 +8,8 @@
 S: Start state
 G: Goal state
 B: Blocked state
-X" Lava state
+X: Lava state
+
 =#
 
 using POMDPs, POMDPModelTools, QuickPOMDPs, DiscreteValueIteration
