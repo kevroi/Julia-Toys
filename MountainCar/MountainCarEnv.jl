@@ -1,4 +1,5 @@
 # Based on the implementation in the ReinforcementLearningEnvironments.jl package
+export MountainCarEnv
 
 struct MountainCarEnvParams
     min_pos::float
@@ -12,7 +13,6 @@ struct MountainCarEnvParams
 
     # default constructor with params from Sutton & Barto
     function MountainCarEnvParams(
-        T=Float64,
         min_pos=-1.2,
         max_pos=0.6,
         max_speed=0.07,
@@ -22,16 +22,15 @@ struct MountainCarEnvParams
         gravity=0.0025,
         max_steps=200
     )
-        P = new(
-            min_pos,
-            max_pos,
-            max_speed,
-            goal_pos,
-            goal_velocity,
-            power,
-            gravity,
-            max_steps,
-            )
+        P = new(min_pos,
+                max_pos,
+                max_speed,
+                goal_pos,
+                goal_velocity,
+                power,
+                gravity,
+                max_steps,
+                )
         return P
     end
 end
@@ -54,11 +53,13 @@ mutable struct MountainCarEnv
         t = 0,
         rng = Random.GLOBAL_RNG
 
-        
         E = new(params,
-                zeros(T, 2),
-                0,
-                false, 0)
+                state,
+                action,
+                done,
+                t,
+                rng
+                )
 
         return E
     end
@@ -66,7 +67,28 @@ mutable struct MountainCarEnv
 end
 
 
-function step(env::MountainCarEnv, force)
+# Define State Space
+function state_space(env::MountainCarEnv)
+    (env.params.min_pos .. env.params.max_pos) ×
+    (-env.params.max_speed .. env.params.max_speed)
+end
+
+# Define Action Space: backwards, zero and forward throttle
+action_space(::MountainCarEnv) = Base.OneTo(3)
+action_space(::MountainCarEnv) = -1.0 .. 1.0
+
+# Reward function
+reward(env::MountainCarEnv) = env.done ? 0.0 : -1.0
+
+
+function (env::MountainCarEnv)(a::Int)
+    @assert a in action_space(env)
+    env.action = a
+    step!(env, a - 2)
+end
+
+
+function step!(env::MountainCarEnv, force)
     env.t += 1
     x, v = env.state
     v += force * env.params.power + cos(3 * x) * (-env.params.gravity)
@@ -81,5 +103,14 @@ function step(env::MountainCarEnv, force)
         env.t >= env.params.max_steps
     env.state[1] = x
     env.state[2] = v
+    nothing
+end
+
+
+function reset!(env::MountainCarEnv)
+    env.state[1] = 0.2 * rand(env.rng, T) - 0.6
+    env.state[2] = 0.0
+    env.done = false
+    env.t = 0
     nothing
 end
