@@ -21,9 +21,9 @@ $ julia
   | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
-julia> ]
-(@v1.8) pkg> activate .
-julia> include("ann.jl")
+$ julia> ]
+$ (@v1.8) pkg> activate .
+$ julia> include("ann.jl")
 ```
 
 Pressing the `]` key shows you your package REPL, and `activate .` activates a virtual env like in python.
