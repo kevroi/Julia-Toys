@@ -42,9 +42,9 @@ Base.show(io::IO, params::MountainCarEnvParams) = print(
 )
 
 
-mutable struct MountainCarEnv{ACT,AbstractRNG} <: AbstractEnv
+mutable struct MountainCarEnv{ACT}
     params::MountainCarEnvParams
-    state::Vector{float} # 2D vector of position and speed
+    state::Vector{Float64} # 2D vector of position and speed
     action::ACT
     done::Bool
     t::Int
@@ -59,7 +59,7 @@ mutable struct MountainCarEnv{ACT,AbstractRNG} <: AbstractEnv
         t = 0,
         rng = Random.GLOBAL_RNG
 
-        E = new(params,
+        E = new{typeof(params)}(params,
                 state,
                 action,
                 done,
