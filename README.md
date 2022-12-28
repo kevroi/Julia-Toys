@@ -13,14 +13,6 @@ As an example, to run the artificial neural neural network that classifies handw
 ```sh-session
 $ cd MNIST
 $ julia
-               _
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)
- _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-|__/                   |
 $ julia> ]
 $ (@v1.8) pkg> activate .
 $ julia> include("ann.jl")
