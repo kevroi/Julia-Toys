@@ -2,13 +2,13 @@
 export MountainCarEnv
 
 struct MountainCarEnvParams
-    min_pos::float
-    max_pos::float
-    max_speed::float
-    goal_pos::float
-    goal_velocity::float
-    power::float
-    gravity::float
+    min_pos::Float64
+    max_pos::Float64
+    max_speed::Float64
+    goal_pos::Float64
+    goal_velocity::Float64
+    power::Float64
+    gravity::Float64
     max_steps::Int
 
     # default constructor with params from Sutton & Barto
@@ -35,8 +35,14 @@ struct MountainCarEnvParams
     end
 end
 
+#overload show()
+Base.show(io::IO, params::MountainCarEnvParams) = print(
+    io,
+    join(["$p=$(getfield(params, p))" for p in fieldnames(MountainCarEnvParams)], ","),
+)
 
-mutable struct MountainCarEnv
+
+mutable struct MountainCarEnv{ACT,AbstractRNG} <: AbstractEnv
     params::MountainCarEnvParams
     state::Vector{float} # 2D vector of position and speed
     action::ACT
